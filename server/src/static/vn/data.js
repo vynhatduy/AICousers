@@ -1,0 +1,271 @@
+export const dataVn = {
+  website: "Suri Technologies",
+  yourName: "Suri Assistance",
+  fee: {
+    OriginalPrice: "4.600.000 VNĐ",
+    PriceReducedTo: "3.600.000 VNĐ",
+  },
+  contactInformation: {
+    contact: ["(+84) 93 154 1339", "info@suritechs.com", "tram@suritechs.com"],
+  },
+  office: [
+    "VP HCM: 897 Hoàng Sa, P11, Quận 3, Tp HCM",
+    "VP Đà Lạt: 5 Nam Kỳ Khởi Nghĩa, Phường 01, TP Đà Lạt",
+    "VP Lâm Hà: Thôn Phúc Hưng, Xã Tân Hà, Huyện Lâm Hà",
+    "Trụ sở India: Jaipur, Rajasthan, Ấn Độ",
+  ],
+  registrationInstructions:
+    "Đầu tiên đọc thông cần phải xác định khóa học cần học, sau đó điền đầy đủ thông tin vào form đăng ký và nhấn đăng ký ngay. Sau khi gửi thông tin xong vui lòng kiểm tra email thường xuyên để nhận thông báo về thanh toán học phí cũng như phương thức học tập hoặc có thể quét mã QR dưới cuối trang để liên hệ với chuyên viên tư vấn",
+  introduction: [
+    "Học Viện AICT – Tiên Phong Ứng Dụng Trí Tuệ Nhân Tạo",
+    "Slogan StepUp AI - X2 Năng suất",
+    "Mỗi học viên có đồ án tốt nghiệp cá nhân, chứng minh được đã áp",
+  ],
+  mission:
+    "Nâng cao năng lực số cho người Việt thông qua đào tạo ứng dụng AI thực tiễn, giúp học viên tự tin áp dụng ngay vào công việc và cuộc sống.",
+
+  practicalTraining:
+    "Tập trung thực hành – Học 1 buổi, thực hành 5 ngày. Cam kết đầu ra với tỷ lệ thực hành là 80% - 90%.",
+
+  coreValues:
+    "Tiên phong đào tạo AI ứng dụng theo phương pháp StepUp độc quyền.",
+
+  targetLearners: [
+    "Doanh nghiệp cần nâng cao năng lực nhân sự với AI",
+    "Cơ quan nhà nước, tổ chức chính phủ ứng dụng AI vào cải cách hành chính",
+    "Hiệp hội, CLB doanh nghiệp muốn nâng tầm công nghệ",
+    "Giáo viên, đặc biệt mầm non, tiểu học, trung học",
+    "Cán bộ công đoàn các cấp",
+    "Sinh viên, AI trainer, AI mentor tương lai",
+    "Nhóm cá nhân từ 20 người trở lên có nhu cầu học AI",
+    "Cá nhân muốn học 1 kèm 1",
+  ],
+  courses: [
+    {
+      title: "Khóa StepUp AI căn bản 1+5",
+      description: "Dành cho doanh nghiệp, học 1 buổi, thực hành 5 ngày.",
+    },
+    {
+      title: "Khóa AI Gamma 8 trong 1",
+      description: "Học 1 buổi, thực hành 5 ngày.",
+    },
+    {
+      title: "Khóa StepUp AI cho cán bộ",
+      description: "Dành cho cán bộ, công chức, viên chức.",
+    },
+    {
+      title: "Khóa StepUp AI cho giáo viên",
+      description: "Dành cho giáo viên mầm non.",
+    },
+    {
+      title: "Khóa StepUp AI cho cán bộ công đoàn",
+      description: "Dành cho cán bộ công đoàn cấp cơ sở.",
+    },
+    {
+      title: "Khóa StepUp AI cho hiệp hội",
+      description: "Dành cho nhóm doanh nghiệp hội viên các Hiệp hội, CLB.",
+    },
+    {
+      title: "Lớp AI ChatGPT++",
+      description:
+        "Dành riêng cho Giám đốc, Chủ doanh nghiệp và Thư ký, Trợ lý.",
+    },
+    {
+      title: "AI Training Workshop",
+      description:
+        "1 buổi cho tổ chức, doanh nghiệp để nắm căn bản về AI. Học, thực hành và nhận Giấy Chứng nhận hoàn thành trong một buổi đào tạo.",
+    },
+  ],
+
+  educators: {
+    title:
+      "Gồm AI Trainer và AI Mentor có Chứng nhận Generative AI for Educators của Google, dành riêng cho người làm công tác huấn luyện và đào tạo nhân sự học ứng dụng AI vào công việc thực tế.",
+    educatorList: [
+      {
+        name: "Nguyễn Thăng Long (Alex)",
+        certificate: [
+          "AI Educator",
+          "Co-Founder AICT",
+          "CEO ALM",
+          "Nesta Certified Trainer",
+          "Chứng nhận Generative AI for Educators của Google",
+          "Chứng nhận AI của Intel, OpenAI và AICT",
+        ],
+      },
+      {
+        name: "Lê Li (Lily)",
+        certificate: [
+          "AI Educator",
+          "Co-Founder AICT",
+          "Giám đốc đào tạo AICT",
+          "Chứng nhận AI Essentials của Google ",
+          "Chứng nhận Generative AI for Educators của Google",
+          "Chứng nhận Google Data Analytic",
+          "Chứng nhận AI của Intel, OpenAI và AICT",
+        ],
+      },
+      {
+        name: "Đinh Duy Linh ",
+        certificate: [
+          "AI Educator",
+          "Cố vấn AICT",
+          "Chứng nhận Generative AI for Educators của Google",
+          "Chứng nhận AI của Intel, OpenAI và AICT",
+        ],
+      },
+      {
+        name: "Phạm Hữu Phúc Ân (Andy)",
+        certificate: [
+          "AI Educator",
+          "Co-Founder AICT",
+          "Giám đốc đào tạo AICT",
+          "Chứng nhận AI Essentials của Google ",
+          "Chứng nhận Generative AI for Educators của Google",
+          "Chứng nhận AI của Intel, OpenAI và AICT",
+        ],
+      },
+    ],
+    mentors: [
+      {
+        name: "Nguyễn Thị Yến",
+        certificate: ["AI Mentor ", "Chứng nhận AI của Intel, OpenAI và AICT."],
+      },
+      {
+        name: "Lê Vũ Hà",
+        certificate: ["AI Mentor ", "Chứng nhận AI của Intel, OpenAI và AICT."],
+      },
+      {
+        name: "Lâm Bảo Trân",
+        certificate: ["AI Mentor ", "Chứng nhận AI của Intel, OpenAI và AICT."],
+      },
+      {
+        name: "Minh Ánh",
+        certificate: [
+          "Junior AI Mentor ",
+          "Chứng nhận AI của Intel, OpenAI và AICT.",
+        ],
+      },
+      {
+        name: "Huỳnh Trang",
+        certificate: ["AI Mentor ", "Chứng nhận AI của Intel, OpenAI và AICT."],
+      },
+      {
+        name: "Nguyễn Thị Hồng Nhung",
+        certificate: ["AI Mentor ", "Chứng nhận AI của Intel, OpenAI và AICT."],
+      },
+      {
+        name: "Nguyễn Thị Hồng Nhung",
+        certificate: ["Trương Bảy", "Chứng nhận AI của Intel, OpenAI và AICT."],
+      },
+      {
+        name: "Nguyễn Hương Giang",
+        certificate: [
+          "Junior AI Mentor ",
+          "Chứng nhận AI của Intel, OpenAI và AICT.",
+        ],
+      },
+    ],
+  },
+
+  studentFeedback: [
+    {
+      name: "Nguyễn Minh Trí Chuyên viên Marketing",
+      description:
+        "Trước khoá học, mình hoàn toàn mù mờ về AI. Nhưng sau 3 ngày học tập cùng giảng viên của Suri Technologies, mình không chỉ hiểu được các khái niệm nền tảng mà còn biết cách ứng dụng AI vào công việc thực tế như tạo chatbot, phân tích dữ liệu và tối ưu quy trình marketing.",
+    },
+    {
+      name: "Trần Thị Lan Chủ shop online tại Đà Lạt",
+      description:
+        "Ấn tượng nhất là phần thực hành xây dựng chatbot AI. Mình đã tạo được một AI Agent demo cho doanh nghiệp nhỏ của mình chỉ sau vài giờ. Khoá học thật sự đáng giá với những ai đang muốn bắt đầu hành trình chuyển đổi số.",
+    },
+    {
+      name: "Phạm Quốc Huy Nhân viên văn phòng",
+      description:
+        "Khoá học được tổ chức bài bản, tài liệu đầy đủ, giảng viên hỗ trợ tận tâm cả trong và sau buổi học. Mình đặc biệt thích phần ứng dụng ChatGPT vào công việc văn phòng, rất thiết thực!",
+    },
+  ],
+  fad: [
+    {
+      question: "Cần chuẩn bị gì trước khi học?",
+      answer:
+        "Bạn không cần nền tảng công nghệ sâu hay phải là dân IT. Khóa học được thiết kế cho cả người mới bắt đầu, chỉ yêu cầu tư duy logic cơ bản và tinh thần học hỏi. Nội dung được xây dựng rõ ràng, dễ hiểu, dẫn dắt từng bước để bạn dễ dàng tiếp cận.",
+    },
+    {
+      question: "Có cần biết lập trình trước không?",
+      answer:
+        "Không bắt buộc phải biết lập trình. Khóa học có nhiều cấp độ: người mới sẽ học qua ví dụ trực quan và công cụ kéo-thả để hiểu nguyên lý mà không cần viết code. Người có nền tảng kỹ thuật sẽ được học phần nâng cao với hướng dẫn chi tiết bằng mã lập trình, giúp đào sâu kiến thức.",
+    },
+    {
+      question: "Có thể học thử trước khi đăng ký không?",
+      answer:
+        "Có, bạn được học thử miễn phí một số bài giảng đầu tiên. Điều này giúp bạn trải nghiệm phong cách giảng dạy, nội dung khóa học và tính ứng dụng thực tế trước khi quyết định đăng ký chính thức.",
+    },
+    {
+      question: "Khóa học này khác gì video miễn phí trên mạng?",
+      answer:
+        "Khóa học có lộ trình bài bản, từ cơ bản đến nâng cao, tránh lan man. Bạn được thực hành áp dụng ngay vào công việc, có sự hỗ trợ từ giảng viên hoặc mentor khi gặp khó khăn, và nội dung luôn được cập nhật theo xu hướng mới nhất trong lĩnh vực AI, đảm bảo kiến thức không lỗi thời.",
+    },
+  ],
+  whenCompleted:
+    "Bạn sẽ được cấp giấy chứng nhận đã hoàn thành khóa học khi đạt 80/100 điểm đồ án tốt nghiệp của khóa học",
+  courseRoadmap: [
+    {
+      title: "Tư duy nền tảng về AI – Lý do AI thay đổi cuộc chơi",
+      description:
+        "Tìm hiểu về lịch sử, khái niệm và ứng dụng của AI trong thực tế",
+    },
+    {
+      title: "Làm chủ ChatGPT trong công việc",
+      description:
+        "Làm quen với ChatGPT, Midjourney và các công cụ AI phổ biến",
+    },
+    {
+      title: "AI cho Marketing, Content, HR, Sales",
+      description: "Học cách tích hợp AI vào quy trình làm việc hàng ngày",
+    },
+    {
+      title: "Tự động hóa công việc với công cụ AI miễn phí",
+      description: "Áp dụng kiến thức vào các dự án thực tế và nhận chứng chỉ",
+    },
+    {
+      title: "Dự án cuối khóa + Nhận chứng chỉ OpenAI Foundation Knowledge",
+      description: "Áp dụng kiến thức vào các dự án thực tế và nhận chứng chỉ",
+    },
+  ],
+  benefit: [
+    {
+      title: "Tăng năng suất gấp 3 lần với AI văn phòng",
+      description:
+        "Học cách sử dụng AI để tự động hóa các công việc thường xuyên, giúp tăng năng suất lên gấp đôi",
+    },
+    {
+      title: "Tiết kiệm thời gian soạn thảo, báo cáo, slide, marketing",
+      description:
+        "Mở rộng cơ hội việc làm với kỹ năng AI được săn đón trong thị trường lao động hiện nay",
+    },
+    {
+      title: "Chứng chỉ uy tín",
+      description:
+        "Nhận chứng chỉ chuẩn OpenAI, được công nhận bởi các doanh nghiệp hàng đầu",
+    },
+    {
+      title: "Biết cách đặt câu hỏi thông minh với ChatGPT",
+      description:
+        "Cập nhật kiến thức mới nhất về AI, giúp bạn luôn đi đầu trong lĩnh vực công nghệ",
+    },
+  ],
+  other: [
+    {
+      quantity: "100 +",
+      description: "Doanh nghiệp",
+    },
+    {
+      quantity: "200 +",
+      description: "Buổi đào tạo",
+    },
+    {
+      quantity: "32000 +",
+      description: "Học viên đã học",
+    },
+  ],
+};

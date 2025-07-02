@@ -1,0 +1,13 @@
+FROM node:20 AS client-builder
+
+WORKDIR /app
+
+ARG VITE_SOCKET_SERVER_URL
+ENV VITE_SOCKET_SERVER_URL=${VITE_SOCKET_SERVER_URL}
+RUN echo "VITE_SOCKET_SERVER_URL=$VITE_SOCKET_SERVER_URL" > .env
+
+
+COPY . .
+RUN npm install --include=optional
+
+RUN npm run build
