@@ -3,10 +3,6 @@ import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/surichatbot/client/",
   plugins: [react()],
-  // build: {
-  //   rollupOptions: {
-  //     external: ["@emotion/react/jsx-runtime"],
-  //   },
-  // },
 });

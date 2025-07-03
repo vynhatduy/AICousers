@@ -4,13 +4,13 @@ dotenv.config();
 
 export async function sendContactMail(data) {
   const transporter = nodemailer.createTransport({
-    // for test with gmail
-    service: "gmail",
+    // // for test with gmail
+    // service: "gmail",
 
     // for deploy with smtp mail
-    // host: process.env.SMTP_HOST,
-    // port: Number(process.env.SMTP_PORT),
-    // secure: process.env.SMTP_SECURE === "true",
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: process.env.SMTP_SECURE === "true",
 
     auth: {
       user: process.env.SMTP_USER,

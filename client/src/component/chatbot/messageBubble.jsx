@@ -2,12 +2,10 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import UserIcon from "@mui/icons-material/Person";
 import Markdown from "react-markdown";
-
+import remarkGfm from "remark-gfm";
 const MessageBubble = ({ sender, text }) => {
   const isUser = sender === "user";
-  const cleanText = text
-    .replace(/\n{2,}/g, "\n\n") // loại bỏ nhiều dòng trống liên tiếp
-    .trim();
+  const cleanText = text.replace(/\n{3,}/g, "\n\n").trim();
 
   const renderContent = () => {
     if (text === "__typing__") {
@@ -45,7 +43,7 @@ const MessageBubble = ({ sender, text }) => {
           },
         }}
       >
-        <Markdown>{cleanText}</Markdown>
+        <Markdown remarkPlugins={[remarkGfm]}>{cleanText}</Markdown>
       </Box>
     );
   };

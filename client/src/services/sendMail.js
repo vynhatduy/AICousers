@@ -1,25 +1,34 @@
-import emailjs from "emailjs-com";
 import axios from "axios";
 
-const VITE_SOCKET_SERVER_URL =
-  import.meta.env.VITE_SOCKET_SERVER_URL || window.location.origin;
+const API_URL = import.meta.env.VITE_API_URL || "";
 
 export const SendMail = async (data) => {
   try {
-    const response = await axios.post(`/api/send-email`, data);
+    const response = await axios.post(`${API_URL}/send_mail.php`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-    console.log(response);
     return {
       success: true,
-      message: "Đăng ký thành công.",
-      response,
+      message: response.data.message || "Gửi email thành công.",
     };
   } catch (error) {
-    console.error("Lỗi gửi email:", error);
+    let message = "Gửi email thất bại.";
+    let detailedError = null;
+
+    if (error.response) {
+      message = error.response.data?.message || message;
+      detailedError = error.response.data?.error || null;
+    } else {
+      detailedError = error.message;
+    }
+
     return {
       success: false,
-      message: "Gửi email thất bại.",
-      error,
+      message,
+      error: detailedError,
     };
   }
 };
