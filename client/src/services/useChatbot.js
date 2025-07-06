@@ -140,8 +140,6 @@
 
 import { useRef, useState, useCallback } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 export default function useChatbot() {
   const [messages, setMessages] = useState([]);
   const [botBuffer, setBotBuffer] = useState("");

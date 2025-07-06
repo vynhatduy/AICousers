@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "";
-
 export const SendMail = async (data) => {
   try {
     const response = await axios.post(`/services/api/send_mail.php`, data, {
