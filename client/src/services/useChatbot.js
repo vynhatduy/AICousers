@@ -179,7 +179,7 @@ export default function useChatbot() {
     abortControllerRef.current = controller;
 
     try {
-      const response = await fetch(`${API_URL}/chatbot_stream.php`, {
+      const response = await fetch(`/services/api/chatbot_stream.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
