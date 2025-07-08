@@ -139,7 +139,7 @@
 // }
 
 import { useRef, useState, useCallback } from "react";
-
+const apiBase = import.meta.env.BASE_URL + "services/api";
 export default function useChatbot() {
   const [messages, setMessages] = useState([]);
   const [botBuffer, setBotBuffer] = useState("");
@@ -177,7 +177,7 @@ export default function useChatbot() {
     abortControllerRef.current = controller;
 
     try {
-      const response = await fetch(`/services/api/chatbot_stream.php`, {
+      const response = await fetch(`${apiBase}/chatbot_stream.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

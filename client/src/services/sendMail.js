@@ -1,8 +1,8 @@
 import axios from "axios";
-
+const apiBase = import.meta.env.BASE_URL + "services/api";
 export const SendMail = async (data) => {
   try {
-    const response = await axios.post(`/services/api/send_mail.php`, data, {
+    const response = await axios.post(`${apiBase}/send_mail.php`, data, {
       headers: {
         "Content-Type": "application/json",
       },
