@@ -16,6 +16,7 @@ if (function_exists('apache_setenv')) {
 ini_set('zlib.output_compression', '0');
 ini_set('output_buffering', 'off');
 ini_set('implicit_flush', 1);
+
 while (ob_get_level()) ob_end_clean();
 ob_implicit_flush(true);
 
