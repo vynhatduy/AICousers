@@ -1,0 +1,6 @@
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+  Header set Cache-Control "no-cache"
+  Header set Content-Type "text/event-stream"
+</IfModule>
+SetEnv no-gzip 1

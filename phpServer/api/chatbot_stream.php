@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
+// SSE headers
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 header('Connection: keep-alive');
@@ -16,7 +17,8 @@ ini_set('zlib.output_compression', '0');
 ini_set('output_buffering', 'off');
 ini_set('implicit_flush', 1);
 while (ob_get_level()) ob_end_clean();
-ob_implicit_flush(1);
+ob_implicit_flush(true);
+
 
 // Nhận dữ liệu từ client
 $raw = file_get_contents('php://input');
@@ -33,8 +35,8 @@ if (!isset($input['message']) || trim($input['message']) === '') {
 }
 
 $userMessage = $input['message'];
-
 $apiKey = $_ENV['OPENAI_API_KEY'] ?? null;
+
 if (!$apiKey) {
     error_log("Missing OPENAI_API_KEY");
     echo "data: Error: Missing OpenAI API key\n\n";
@@ -46,42 +48,42 @@ $model = $_ENV['API_MODEL'] ?? "gpt-4.1-nano";
 $lang = detectLanguage($userMessage);
 error_log("Detected language: $lang");
 
-// Load reference data
 $dataPath = $lang === 'vi' ? '../static/vi.json' : '../static/en.json';
 $data = json_decode(file_get_contents($dataPath), true);
+
 if (!$data) {
     error_log("Failed to load $dataPath");
     echo "data: Error: Failed to load reference data\n\n";
     flush();
     exit;
 }
+
 $referenceData = json_encode($data, JSON_UNESCAPED_UNICODE);
 
-// Prompt
 $prompt = $lang === 'vi'
     ? "Bạn là một trợ lý AI thông minh của Suri Technologies.
-    
+
     Chỉ sử dụng thông tin bên dưới để trả lời câu hỏi của người dùng.
-    
+
     ❗ Nếu không tìm thấy thông tin phù hợp, hãy lịch sự từ chối trả lời.
-    
+
     ❗ *Bắt buộc phải trả lời bằng đúng ngôn ngữ mà người dùng sử dụng trong câu hỏi.*
-    
+
     Tuyệt đối không phỏng đoán, suy diễn hay bịa đặt thông tin ngoài dữ liệu tham chiếu.
-    
+
     Thông tin tham khảo: $referenceData"
     : "You are an intelligent AI assistant of Suri Technologies.
-    
+
     Only use the information below to answer user questions.
-    
+
     ❗ Your task is to strictly answer in **English** if the user’s question is in English. 
-    
+
     Do not respond in Vietnamese, even if the reference contains Vietnamese content.
-    
+
     ❗ If relevant information is not found, politely say you don't know.
-    
+
     ❗ Never speculate or hallucinate information. Just stick to the data.
-    
+
     Reference data: $referenceData";
 
 $payload = [
@@ -98,8 +100,9 @@ error_log("Sending payload to OpenAI");
 
 $headers = [];
 $ch = curl_init('https://api.openai.com/v1/chat/completions');
+
 curl_setopt_array($ch, [
-    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_RETURNTRANSFER => false,
     CURLOPT_POST => true,
     CURLOPT_POSTFIELDS => json_encode($payload),
     CURLOPT_HTTPHEADER => [
@@ -111,43 +114,8 @@ curl_setopt_array($ch, [
         if (count($parts) == 2) {
             $headers[strtolower(trim($parts[0]))] = trim($parts[1]);
         }
-        error_log(">> HEADER: " . trim($header));
         return strlen($header);
     },
-]);
-
-$response = curl_exec($ch);
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-if ($httpCode === 429) {
-    error_log(" Rate limit exceeded.");
-    $retry = $headers['retry-after'] ?? 'unknown';
-    echo "data: Error: Rate limit exceeded. Please wait $retry seconds.\n\n";
-    flush();
-    curl_close($ch);
-    exit;
-}
-
-if ($response === false) {
-    $error = curl_error($ch);
-    error_log(" cURL error: $error");
-    echo "data: Error: Failed to contact OpenAI\n\n";
-    flush();
-    curl_close($ch);
-    exit;
-}
-
-// Nếu không phải stream thì xử lý như sau
-if ($httpCode !== 200) {
-    error_log("Unexpected HTTP status: $httpCode");
-    echo "data: Error: OpenAI API error. HTTP code $httpCode\n\n";
-    flush();
-    curl_close($ch);
-    exit;
-}
-
-curl_setopt_array($ch, [
-    CURLOPT_RETURNTRANSFER => false,
     CURLOPT_WRITEFUNCTION => function ($ch, $chunk) {
         $lines = explode("\n", $chunk);
         foreach ($lines as $line) {
@@ -178,8 +146,34 @@ curl_setopt_array($ch, [
 ]);
 
 $response = curl_exec($ch);
-curl_close($ch);
 
-echo "event: done\ndata: [CLOSE]\n\n";
-flush();
-error_log(" OpenAI stream completed.");
+if ($response === false) {
+    $error = curl_error($ch);
+    error_log("cURL error: $error");
+    echo "data: Error: Failed to contact OpenAI\n\n";
+    flush();
+    curl_close($ch);
+    exit;
+}
+
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+if ($httpCode === 429) {
+    error_log("Rate limit exceeded.");
+    $retry = $headers['retry-after'] ?? 'unknown';
+    echo "data: Error: Rate limit exceeded. Please wait $retry seconds.\n\n";
+    flush();
+    curl_close($ch);
+    exit;
+}
+
+if ($httpCode !== 200) {
+    error_log("Unexpected HTTP status: $httpCode");
+    echo "data: Error: OpenAI API error. HTTP code $httpCode\n\n";
+    flush();
+    curl_close($ch);
+    exit;
+}
+
+curl_close($ch);
+error_log("OpenAI stream completed.");
