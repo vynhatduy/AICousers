@@ -1,5 +1,12 @@
 <?php
-require_once '../services/send_contact_mail.php';
+
+// log error in website for dev
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+require_once '../services/mail.php';
 
 // Bổ sung đoạn sau để lấy dữ liệu từ client
 $raw = file_get_contents('php://input');
@@ -18,7 +25,21 @@ if (!$data || !is_array($data)) {
     exit;
 }
 
-$result = sendContactMail($data);
+// valid data
+$requiredFields = ['name', 'email', 'phone', 'position', 'company'];
+$missingFields = array_filter($requiredFields, fn($field) => empty($data[$field]));
+
+if (!empty($missingFields)) {
+    http_response_code(422);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Thiếu thông tin bắt buộc.',
+        'missing_fields' => $missingFields,
+    ]);
+    exit;
+}
+
+$result = sendContactMailWithPHPMail($data);
 
 if ($result === true) {
     echo json_encode(['success' => true, 'message' => 'Gửi email thành công.']);
