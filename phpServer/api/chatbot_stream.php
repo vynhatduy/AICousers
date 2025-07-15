@@ -50,7 +50,6 @@ $embeddingModel = $_ENV['EMBEDDING_MODEL'] ?? "text-embedding-3-small";
 $lang = detectLanguage($userMessage);
 error_log("Detected language: $lang");
 
-// === Hàm hỗ trợ ===
 function loadEmbeddings($lang): array {
     $vectorFile = $lang === 'vi' ? '../static/vectors/vectors_vi.json' : '../static/vectors/vectors_en.json';
     $chunkFile  = $lang === 'vi' ? '../static/chunks/chunks_vi.json' : '../static/chunks/chunks_en.json';
@@ -58,7 +57,28 @@ function loadEmbeddings($lang): array {
     $vectors = json_decode(file_get_contents($vectorFile), true);
     $chunks  = json_decode(file_get_contents($chunkFile), true);
 
-    return [$vectors, $chunks];
+    $contactChunks = array_filter($chunks, fn($c) =>
+        str_contains(strtolower($c), 'contact') ||
+        str_contains(strtolower($c), 'email') ||
+        str_contains(strtolower($c), 'phone') ||
+        str_contains(strtolower($c), 'office')
+    );
+
+    $mainChunks = array_values(array_diff($chunks, $contactChunks));
+
+    return [$vectors, $mainChunks, array_values($contactChunks)];
+}
+
+
+
+
+// Detect if user wants all courses
+function isRequestingAllCourses(string $message): bool {
+    $keywords = ['all courses', 'danh sách khóa học', 'tất cả khóa học', 'list of courses', 'what courses', 'courses'];
+    foreach ($keywords as $kw) {
+        if (stripos($message, $kw) !== false) return true;
+    }
+    return false;
 }
 
 function cosineSimilarity($a, $b): float {
@@ -71,10 +91,10 @@ function cosineSimilarity($a, $b): float {
     return $normA && $normB ? $dot / (sqrt($normA) * sqrt($normB)) : 0.0;
 }
 
-function getEmbedding(string $text, string $apiKey): ?array {
+function getEmbedding(string $text, string $apiKey,string $embeddingModel): ?array {
     $payload = json_encode([
         'input' => $text,
-        'model' => 'text-embedding-3-small',
+        'model' => $embeddingModel,
     ]);
 
     $ch = curl_init('https://api.openai.com/v1/embeddings');
@@ -101,26 +121,46 @@ function getEmbedding(string $text, string $apiKey): ?array {
     return $data['data'][0]['embedding'] ?? null;
 }
 
-// === Áp dụng RAG ===
-list($vectors, $chunks) = loadEmbeddings($lang);
-$userEmbedding = getEmbedding($userMessage, $apiKey);
+// === Áp dụng RAG ===// === Áp dụng RAG ===
+list($vectors, $chunks, $contactChunks) = loadEmbeddings($lang);
+$queryEmbedding = getEmbedding($userMessage, $apiKey,$embeddingModel);
 
-if (!$userEmbedding) {
+if (!$queryEmbedding) {
     echo "data: Error: Failed to compute embedding\n\n";
     flush();
     exit;
 }
+if (isRequestingAllCourses($userMessage)) {
+    $courseChunks = array_filter($chunks, function ($chunk) {
+        $lower = strtolower($chunk);
+        return str_contains($lower, 'course') || str_contains($lower, 'khóa học');
+    });
 
-$similarities = [];
-foreach ($vectors as $i => $vector) {
-    $similarities[] = [
-        'score' => cosineSimilarity($userEmbedding, $vector),
-        'chunk' => $chunks[$i]
-    ];
+    if (empty($courseChunks)) {
+        echo "data: Error: No course information found in data.\n\n";
+        flush();
+        exit;
+    }
+
+    $referenceData = implode("\n---\n", array_merge($courseChunks, $contactChunks));
+    error_log("Loaded ALL course chunks + contact info for course listing request");
+
+} else {
+    $scoredChunks = [];
+    foreach ($vectors as $i => $vec) {
+        $score = cosineSimilarity($queryEmbedding, $vec);
+        $scoredChunks[] = ['score' => $score, 'chunk' => $chunks[$i]];
+    }
+
+    usort($scoredChunks, fn($a, $b) => $b['score'] <=> $a['score']);
+    $topChunks = array_slice($scoredChunks, 0, 3);
+
+    $referenceData = implode("\n---\n", array_column($topChunks, 'chunk'));
+    $referenceData .= "\n---\n" . implode("\n---\n", $contactChunks);
+
+    error_log("Loaded TOP 3 chunks + contact info based on similarity");
 }
-usort($similarities, fn($a, $b) => $b['score'] <=> $a['score']);
-$topChunks = array_slice(array_column($similarities, 'chunk'), 0, 3);
-$referenceData = implode("\n---\n", $topChunks);
+
 
 // === Prompt chuẩn bị gửi đi ===
 $prompt = $lang === 'vi'

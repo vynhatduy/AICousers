@@ -1,28 +1,35 @@
 {
-  "website": "Suri Technologies",
-  "yourName": "Suri Assistance",
-  "fee": {
-    "OriginalPrice": "4,600,000 VND",
-    "PriceReducedTo": "3,600,000 VND"
+  "general": {
+    "website": "Suri Technologies",
+    "assistantName": "Suri Assistance",
+    "fee": {
+      "OriginalPrice": "4,600,000 VND",
+      "PriceReducedTo": "3,600,000 VND"
+    },
+    "registrationInstructions": "First, you need to identify the course you want to study, then fill in all the information in the registration form and click 'Register Now'. After submitting the information, please check your email regularly to receive notifications about tuition payments and study methods, or you can scan the QR code at the bottom of the page to contact a consultant.",
+    "mission": "Enhance digital capabilities for Vietnamese people through practical AI application training, helping students confidently apply it immediately to their work and life.",
+    "coreValues": "Pioneering applied AI training using the exclusive StepUp method.",
+    "practicalTraining": "Focus on practical training – Study 1 session, practice 5 days. Output commitment with a practical ratio of 80% - 90%.",
+    "whenCompleted": "You will be awarded a certificate of course completion when you achieve 80/100 points on the course's graduation project."
   },
-  "contactInformation": {
-    "contact": ["(+84) 93 154 1339", "info@suritechs.com", "tram@suritechs.com"]
+  "contact": {
+    "contacts": [
+      "(+84) 93 154 1339",
+      "info@suritechs.com",
+      "tram@suritechs.com"
+    ],
+    "offices": [
+      "HCMC Office: 897 Hoang Sa, Ward 11, District 3, HCMC",
+      "Da Lat Office: 5 Nam Ky Khoi Nghia, Ward 01, Da Lat City",
+      "Lam Ha Office: Phuc Hung Hamlet, Tan Ha Commune, Lam Ha District",
+      "India Headquarters: Jaipur, Rajasthan, India"
+    ]
   },
-  "office": [
-    "HCMC Office: 897 Hoang Sa, Ward 11, District 3, HCMC",
-    "Da Lat Office: 5 Nam Ky Khoi Nghia, Ward 01, Da Lat City",
-    "Lam Ha Office: Phuc Hung Hamlet, Tan Ha Commune, Lam Ha District",
-    "India Headquarters: Jaipur, Rajasthan, India"
-  ],
-  "registrationInstructions": "First, you need to identify the course you want to study, then fill in all the information in the registration form and click 'Register Now'. After submitting the information, please check your email regularly to receive notifications about tuition payments and study methods, or you can scan the QR code at the bottom of the page to contact a consultant.",
   "introduction": [
     "AICT Academy – Pioneering Applied Artificial Intelligence",
     "Slogan StepUp AI - X2 Productivity",
     "Each student has a personal graduation project, demonstrating their application of AI."
   ],
-  "mission": "Enhance digital capabilities for Vietnamese people through practical AI application training, helping students confidently apply it immediately to their work and life.",
-  "practicalTraining": "Focus on practical training – Study 1 session, practice 5 days. Output commitment with a practical ratio of 80% - 90%.",
-  "coreValues": "Pioneering applied AI training using the exclusive StepUp method.",
   "targetLearners": [
     "Businesses needing to enhance staff capabilities with AI",
     "State agencies, government organizations applying AI to administrative reform",
@@ -114,7 +121,7 @@
         ]
       }
     ],
-    "mentors": [
+    "mentorList": [
       {
         "name": "Nguyen Thi Yen",
         "certificate": ["AI Mentor", "Intel, OpenAI and AICT AI Certificate."]
@@ -187,7 +194,6 @@
       "answer": "The course has a systematic roadmap, from basic to advanced, avoiding rambling. You get to practice applying it directly to your work, receive support from instructors or mentors when encountering difficulties, and the content is always updated with the latest trends in the AI field, ensuring up-to-date knowledge."
     }
   ],
-  "whenCompleted": "You will be awarded a certificate of course completion when you achieve 80/100 points on the course's graduation project.",
   "courseRoadmap": [
     {
       "title": "Foundational thinking about AI – Why AI changes the game",
@@ -210,7 +216,7 @@
       "description": "Apply knowledge to real-world projects and receive a certificate"
     }
   ],
-  "benefit": [
+  "benefits": [
     {
       "title": "Increase productivity 3 times with office AI",
       "description": "Learn how to use AI to automate routine tasks, helping to double productivity"
@@ -228,7 +234,7 @@
       "description": "Stay updated with the latest AI knowledge, helping you always be at the forefront of the technology field"
     }
   ],
-  "other": [
+  "stats": [
     {
       "quantity": "100 +",
       "description": "Businesses"
